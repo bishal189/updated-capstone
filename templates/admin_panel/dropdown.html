@@ -1,0 +1,16 @@
+{% load static %}
+<div class="user-info-dropdown">
+				<div class="dropdown">
+					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img id="dropdown-profile-picture" src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'src/images/user.png' %}{% endif %}" alt="Profile Picture" >
+						</span>
+						<span id="dropdown-profile-name" class="user-name"></span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+						<a class="dropdown-item" href="{% url 'admin_profile' %}"><i class="dw dw-user1"></i> Profile</a>
+						<a class="dropdown-item" href="{% url 'admin_logout' %}"><i class="dw dw-logout"></i> Log Out</a>
+					</div>
+				</div>
+			</div>
+			

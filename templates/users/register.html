@@ -1,0 +1,654 @@
+{% load static %}
+<!-- Basic Page Info -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Site favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'src/images/BAi_LOGO.png' %}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'src/images/BAi_LOGO.png' %}" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&family=Roboto:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/icon-font.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'src/plugins/jquery-steps/jquery.steps.css' %}" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+
+
+  <style>
+    .login-header {
+      background-image: url("{% static 'src/images/header1.png' %}");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border: none;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+      border-bottom: 2px solid #27ae60;
+      height: 65px;
+    }
+
+    .login-header .logo-text {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .login-header .brand-logo a {
+      cursor: default;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .pre-loader {
+      background-image: url("{% static 'src/images/hall.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-color: #ffffff;
+    }
+
+    .loader-logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    .pre-loader-box {
+      width: 210px;
+      height: 210px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .loading-text {
+      font-size: 50px;
+      margin-bottom: 500px;
+      color: #000000;
+    }
+
+    .form-control {
+      width: 100%;
+      height: 38px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 13px;
+      box-sizing: border-box;
+      border-color: #27ae60;
+      margin-bottom: 5px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 2px;
+      /* Reduced bottom margin to bring it closer to the input */
+    }
+
+    .register-box {
+      width: 320px;
+      padding: 5px 5px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 1px 1px;
+    }
+
+    .form-group label,
+    .form-group input[type="radio"] {
+      margin-right: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 5px;
+      border-color: #27ae60;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 14px;
+      margin: 1px 1px;
+      padding: 1px;
+      margin-right: 35px;
+    }
+
+    .btn-primary {
+      border-radius: 5px;
+      width: auto;
+      padding: 6px 12px;
+      background-color: #27ae60 !important;
+      color: white !important;
+      font-weight: bold;
+      font-size: 13px;
+      float: right;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    .btn-primary:disabled {
+      background-color: #27ae60 !important;
+      color: white !important;
+      cursor: not-allowed;
+      opacity: 1 !important;
+    }
+
+    .btn-primary:disabled:hover {
+      background-color: #27ae60 !important;
+      color: white !important;
+    }
+
+    .btn-secondary {
+      border-radius: 5px;
+      width: auto;
+      padding: 6px 12px;
+      font-size: 13px;
+      background-color: #f1f1f1;
+      color: black;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-success {
+      border-radius: 5px;
+      font-size: 13px;
+      width: 27%;
+      padding: 6px 12px;
+      background-color: #27ae60;
+      color: white;
+      font-weight: bold;
+      float: right;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .error-message {
+      color: red;
+      display: none;
+      font-size: 10px;
+    }
+
+    .invalid {
+      border-color: red !important;
+      box-shadow: 0px 0px 3px red;
+    }
+
+    .position-relative {
+      position: relative;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 1px;
+      font-size: 10px;
+    }
+
+    .step-indicator div {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-indicator .circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 2px solid gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 5px auto;
+      color: rgb(0, 0, 0);
+      font-size: 18px;
+      margin-top: 1px;
+    }
+
+    .step-indicator .active .circle {
+      border-color: green;
+      color: green;
+      font-weight: bold;
+    }
+
+    .step-indicator .completed .circle {
+      background-color: green;
+      color: white;
+    }
+
+    .step-indicator .step-label {
+      color: black;
+      font-size: 13px;
+      margin-bottom: 10px;
+
+    }
+
+    .step-indicator .active .step-label {
+      font-weight: bold;
+      color: green;
+    }
+
+    .bdate {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    #overview-section p {
+      font-size: 14px;
+    }
+
+    #overview-section {
+      margin-top: 15px;
+    }
+
+  </style>
+</head>
+
+
+<body class="login-page">
+  <div class="pre-loader">
+    <div class="pre-loader-box">
+      <div class="loader-logo">
+        <img src="{% static 'src/images/BAi_LOGO.png' %}" alt="AI Logo" />
+      </div>
+      <div class="loader-progress" id="progress_div">
+        <div class="bar" id="bar1"></div>
+      </div>
+      <div class="percent" id="percent1"></div>
+      <div class="loading-text">Loading...</div>
+    </div>
+  </div>
+  <div class="login-header box-shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <div class="brand-logo">
+        <a href="#">
+          <img src="{% static 'src/images/BAi_LOGO.png' %}" alt="AI Logo" />
+          <span class="logo-text">Barangay AI</span>
+        </a>
+      </div>
+      <div class="login-menu">
+        <ul>
+          <li><a href="{% url 'login' %}" style="color: white;">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="register-page-wrap d-flex align-items-center flex-wrap justify-content-center">
+    <div class="container"></div>
+    <div class="col-md-6 col-lg-5">
+      <div class="register-box">
+        <div class="wizard-content">
+          <form class="tab-wizard2 wizard-circle wizard" method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <!-- Credentials Section -->
+
+            <body>
+              <div class="card-body">
+                <div class="step-indicator">
+                  <div id="step-1">
+                    <div class="circle">1</div>
+                    <div class="step-label"> <b>Account Credentials</b></div>
+                  </div>
+                  <div id="step-2">
+                    <div class="circle">2</div>
+                    <div class="step-label"><b>Personal Information</b></div>
+                  </div>
+                  <div id="step-3">
+                    <div class="circle">3</div>
+                    <div class="step-label"><b>Overview Information</b></div>
+                  </div>
+                </div>
+                <form id="registration-form">
+                  <!-- Credentials Section -->
+                  <div id="credentials-section" class="form-section active">
+                    <div class="form-group">
+                      <label>Email Address</label>
+                      <input type="email" maxlength="50" id="email" class="form-control" name='email' required
+                        placeholder="Enter email@gmail.com">
+                      <div class="error-message" id="error-email">Enter a valid Gmail address(e.g.,yourname@gmail.com).
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Username</label>
+                      <input type="text" maxlength="50" id="username" class="form-control" name='username' required
+                        placeholder="Enter Username">
+                      <div class="error-message" id="error-username">Please enter a username.</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" maxlength="50" id="password" class="form-control" name='password' required
+                        placeholder="Enter Password">
+                      <div class="error-message" id="error-password">Please enter a password.</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Confirm Password</label>
+                      <input type="password" maxlength="50" id="confirm_password" class="form-control"
+                        name='confrim_password' required placeholder="Confirm Password">
+                      <div class="error-message" id="error-confirm-password">Passwords do not match.</div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="goToNextSection(1)">Next</button>
+                  </div>
+
+
+                  <!-- Personal Information Section -->
+                  <div id="personal-info-section" class="form-section">
+                    <div class="form-group">
+                      <label>First Name</label>
+                      <input type="text" maxlength="20" id="first_name" name='first_name' class="form-control" required
+                        placeholder="Enter First Name">
+                      <div class="error-message" id="error-first-name">Please enter your first name.</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Last Name</label>
+                      <input type="text" maxlength="20" id="last_name" name='last_name' class="form-control" required
+                        placeholder="Enter Last Name">
+                      <div class="error-message" id="error-last-name">Please enter your last name.</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Birth Date</label>
+                      <input type="date" id="birth_date" class="bdate" required>
+                      <div class="error-message" id="error-birth-date">Please select your birthdate.</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Gender</label>
+                      <input type="radio" name="gender" value="Male"> Male
+                      <input type="radio" name="gender" value="Female"> Female
+                      <div class="error-message" id="error-gender">Please select a gender.</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Contact Number</label>
+                      <input type="tel" maxlength="11" pattern="\d{11}" name='contact_number' id="contact_number"
+                        class="form-control" required placeholder="Enter Contact Number"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                      <div class="error-message" id="error-contact">Please enter a valid contact number (e.g.,
+                        09123456789).</div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="goToPreviousSection(1)">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="goToNextSection(2)">Next</button>
+                  </div>
+
+
+                  <!-- Overview Section -->
+                  <div id="overview-section" class="form-section">
+                    <p><b>Email:</b> <span id="overview-email"></span></p>
+                    <p><b>Username: </b> <span id="overview-username"></span></p>
+                    <p><b>Full Name: </b> <span id="overview-fullname"></span></p>
+                    <p><b>Birthdate: </b> <span id="overview-birthdate"></span></p>
+                    <p><b>Gender: </b><span id="overview-gender"></span></p>
+                    <p><b>Contact Number:</b> <span id="overview-contact"></span></p>
+                    <button type="button" class="btn btn-secondary" onclick="goToPreviousSection(2)">Previous</button>
+                    <button type="submit" class="btn btn-success">Register</button>
+                </form>
+              </div>
+          </form>
+        </div>
+      </div>
+      <!-- Modal HTML -->
+      <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Registration Successful</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Registration successful! You will be redirected to the dashboard.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+
+
+          <script>
+
+            let currentStep = 1;
+
+            function updateStepIndicator() {
+              const steps = document.querySelectorAll('.step-indicator div');
+
+              steps.forEach((step, index) => {
+                if (index < currentStep - 1) {
+                  step.classList.add('completed');
+                  step.classList.remove('active');
+                } else if (index === currentStep - 1) {
+                  step.classList.add('active');
+                  step.classList.remove('completed');
+                } else {
+                  step.classList.remove('active', 'completed');
+                }
+              });
+            }
+
+            document.getElementById('registration-form').onsubmit = function (e) {
+              e.preventDefault();
+
+              if (validateCredentials() && validatePersonalInfo()) {
+                const formData = new FormData(this);
+
+                fetch('{% url "register" %}', {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                  }
+                })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.success) {
+                      console.log('register sucessful')
+                      window.location.href = "{% url 'login' %}";
+                    } else {
+                      // Handle errors returned from the server
+                      console.log(data.errors);
+                    }
+                  })
+                  .catch(error => console.error('Error:', error));
+              }
+            };
+
+            function validateCredentials() {
+              const email = document.getElementById('email').value;
+              const username = document.getElementById('username').value;
+              const password = document.getElementById('password').value;
+              const confirmPassword = document.getElementById('confirm_password').value;
+              let isValid = true;
+
+              if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+                document.getElementById('error-email').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-email').style.display = 'none';
+              }
+
+              if (username === '') {
+                document.getElementById('error-username').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-username').style.display = 'none';
+              }
+
+              if (password === '') {
+                document.getElementById('error-password').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-password').style.display = 'none';
+              }
+
+              if (password !== confirmPassword) {
+                document.getElementById('error-confirm-password').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-confirm-password').style.display = 'none';
+              }
+
+              return isValid;
+            }
+
+            function validatePersonalInfo() {
+              const firstName = document.getElementById('first_name').value;
+              const lastName = document.getElementById('last_name').value;
+              const birthDate = document.getElementById('birth_date').value;
+              const gender = document.querySelector('input[name="gender"]:checked');
+              const contactNumber = document.getElementById('contact_number').value;
+
+              let isValid = true;
+
+              if (firstName === '') {
+                document.getElementById('error-first-name').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-first-name').style.display = 'none';
+              }
+
+              if (lastName === '') {
+                document.getElementById('error-last-name').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-last-name').style.display = 'none';
+              }
+
+              if (birthDate === '') {
+                document.getElementById('error-birth-date').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-birth-date').style.display = 'none';
+              }
+
+              if (!gender) {
+                document.getElementById('error-gender').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-gender').style.display = 'none';
+              }
+
+              if (!/^09\d{9}$/.test(contactNumber)) {
+                document.getElementById('error-contact').style.display = 'block';
+                isValid = false;
+              } else {
+                document.getElementById('error-contact').style.display = 'none';
+              }
+
+
+              return isValid;
+            }
+
+            function getCookie(name) {
+              let cookieValue = null;
+              if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                  }
+                }
+              }
+              return cookieValue;
+            }
+
+            function goToPreviousSection(prevSection) {
+              const sections = document.querySelectorAll(".form-section");
+              sections.forEach((section) => section.classList.remove("active"));
+              document.getElementById(prevSection === 1 ? "credentials-section" : prevSection === 2 ?
+                "personal-info-section" : "overview-section").classList.add("active");
+              document.querySelectorAll(".step-indicator div").forEach((step, index) => {
+                step.classList.toggle("active", index === prevSection - 1);
+                document.querySelector('.btn-primary').style.backgroundColor = '...';
+
+              });
+            }
+
+            function goToNextSection(currentSection) {
+              if (currentSection === 1 && validateCredentials()) {
+                document.getElementById('credentials-section').classList.remove('active');
+                document.getElementById('personal-info-section').classList.add('active');
+                document.getElementById('step-1').classList.remove('active');
+                document.getElementById('step-2').classList.add('active');
+              } else if (currentSection === 2 && validatePersonalInfo()) {
+                document.getElementById('personal-info-section').classList.remove('active');
+                document.getElementById('overview-section').classList.add('active');
+                document.getElementById('step-2').classList.remove('active');
+                document.getElementById('step-3').classList.add('active');
+                displayOverview();
+              }
+            }
+
+
+            function displayOverview() {
+              document.getElementById('overview-email').innerText = document.getElementById('email').value;
+              document.getElementById('overview-username').innerText = document.getElementById('username').value;
+              document.getElementById('overview-fullname').innerText = document.getElementById('first_name').value +
+                ' ' + document.getElementById('last_name').value;
+              document.getElementById('overview-birthdate').innerText = document.getElementById('birth_date').value;
+              document.getElementById('overview-gender').innerText = document.querySelector('input[name="gender"]:checked').value;
+              document.getElementById('overview-contact').innerText = document.getElementById('contact_number').value;
+            }
+          </script>
+
+          <!-- JS -->
+          <script src="{% static 'js/jquery.min.js' %}"></script>
+          <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+          <script src="{% static 'vendors/scripts/core.js' %}"></script>
+          <script src="{% static 'vendors/scripts/script.min.js' %}"></script>
+          <script src="{% static 'vendors/scripts/process.js' %}"></script>
+          <script src="{% static 'vendors/scripts/layout-settings.js' %}"></script>
+          <script src="{% static 'vendors/scripts/steps-setting.js' %}"></script>
+
+
+          <!-- JS for register-->
+          <script src="{% static 'vendors/scripts/register-settings.js' %}"></script>
+
+</body>
+
+
+</html>

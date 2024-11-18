@@ -1,0 +1,50 @@
+{% load static %}
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="{% url 'admin_dashboard' %}">
+            <img src="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}" alt="" class="dark-logo">
+            <img src="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}" alt="" class="light-logo">
+            <span class="logo-text">Barangay AI</span>
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li class="dropdown">
+                    <a href="{% url 'admin_dashboard' %}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">Home</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-library"></span>
+                        <span class="mtext">Record Management</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle">BNS Record</a>
+                            <ul class="submenu">
+                                <li><a href="{% url 'admin_child_record' %}">Child Record</a></li>
+                                <li><a href="{% url 'admin_maternal_record' %}">Maternal Record</a></li>
+                            </ul>
+                            <a href="{% url 'admin_events' %}"><big>Events</big></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="{% url 'admin_program_management' %}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-calendar1"></span><span class="mtext">Program Management</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="{% url 'admin_reports' %}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

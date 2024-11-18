@@ -1,0 +1,59 @@
+	/* Table Alignment */
+    .checkbox-datatable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .checkbox-datatable th, .checkbox-datatable td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    /* Ensure header and body rows align */
+    .checkbox-datatable thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f2f2f2;
+        min-width: 50px; /* Minimum width for columns */
+        padding: 15px 20px; /* Increased right padding */
+        font-size: 14px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    /* Body row styles */
+    .checkbox-datatable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    
+    /* Modal Styling (Optional if you use it for the modal) */
+    .modal-header {
+        border-bottom: 1px solid #ddd;
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-footer {
+        border-top: 1px solid #ddd;
+        background-color: #f9f9f9;
+    }
+    
+    .modal-content {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .modal-lg {
+            max-width: 95%;
+        }
+    }
+    .dataTables_length {
+        margin-top: 20px;
+    }

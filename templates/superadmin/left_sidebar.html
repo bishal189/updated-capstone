@@ -1,0 +1,43 @@
+{% load static %}
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="{% url 'superadmin_dashboard' %}">
+            <img src="{% static 'src/images/BRGY_TAGAPO LOGO.png' %}" alt="Tagapo Logo" class="dark-logo">
+            <img src="{% static 'src/images/BRGY_TAGAPO LOGO.png' %}" alt="Tagapo Logo" class="light-logo">
+            <span class="logo-text">Barangay Tagapo</span>
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li class="dropdown">
+                    <a href="{% url 'superadmin_dashboard' %}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span>
+                    </a>
+                </li>
+               <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle ">
+                        <span class="micon dw dw-library"></span><span class="mtext">User Management</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="{% url 'superadmin_usermanagement' %}">User
+                        </a></li>
+                        <li><a href="{% url 'superadmin_account' %}">Account</a></li>
+                    </ul>
+                <li>
+                    <a href="{% url 'superadmin_activitylog' %}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-notification"></span><span class="mtext">Activity Logs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'superadmin_logout' %}" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-logout"></span><span class="mtext">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

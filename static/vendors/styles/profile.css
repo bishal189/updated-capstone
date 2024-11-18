@@ -1,0 +1,194 @@
+		/* General Styles */
+        .card-box {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        /* Profile Photo Section */
+        .profile-photo {
+            position: relative;
+        }
+        
+        .edit-avatar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .avatar-photo {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        
+        /* Profile Info */
+        .profile-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .profile-info li {
+            padding: 5px 0;
+        }
+        
+        .profile-info span {
+            font-weight: 500;
+        }
+        
+        /* Settings Form */
+        .form-center {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: .5rem;
+            font-weight: 600;
+        }
+        
+        .form-control-lg {
+            font-size: 1.1rem;
+            padding: .75rem 1.25rem;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        
+        .btn-lg {
+            padding: .75rem 1.25rem;
+            font-size: 1.125rem;
+        }
+        
+        /* Modal Header */
+        .modal-header {
+            border-bottom: none;
+            padding: 1rem;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        /* Modal Body */
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        /* Image Preview Container */
+        .img-preview-container {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        /* Cropper Container */
+        .cropper-container {
+            text-align: center;
+        }
+        
+        /* File Upload Input */
+        .form-group {
+            margin-top: 1rem;
+        }
+        
+        .form-label {
+            font-weight: bold;
+        }
+        
+        /* Modal Footer */
+        .modal-footer {
+            border-top: none;
+            padding: 1rem;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        
+        /* Close Button */
+        .close {
+            font-size: 1.5rem;
+            opacity: 0.5;
+        }
+        
+        .close:hover {
+            opacity: 1;
+        }
+        
+        .no-underline {
+            text-decoration: none;
+            color: inherit; /* Optional: Ensures the color matches the surrounding text */
+        }
+        
+        .nav .nav-link.active {
+            text-decoration: none;
+            color: inherit; /* Optional: Ensures the color matches the surrounding text */
+        }
+        
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        .invalid-feedback {
+            display: none;
+        }
+        .invalid-feedback.show {
+            display: block;
+        }
+        .alert {
+            display: none;
+        }
+        
+        .left-side-bar .brand-logo .logo-text {
+            font-size: 18px; /* Adjust this value based on your design needs */
+            font-weight: bold; /* Add this if you want the text to be bold */
+            color: white; /* Adjust color to match your design */
+            margin-left: 10px; /* Adds spacing between the logo image and text */
+            vertical-align: middle; /* Aligns the text vertically with the images */
+        }
+        
+        

@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>Barangay AI</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/icon-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/style.css' %}">
+
+    <style>
+        .pre-loader {
+            background-image: url("{% static 'src/images/hall.jpg' %}"); /* Replace with your image URL */
+            background-size: cover; /* Ensures the image covers the entire pre-loader background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* General container styling */
+
+        /* Card design */
+        .custom-card {
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+        }
+        
+        .custom-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Card header */
+        .custom-card-header {
+            background: linear-gradient(135deg, #6c5ce7, #00b894);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 25px;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        }
+        
+        /* Card body */
+        .custom-card-body {
+            padding: 40px;
+            background-color: #f7f9fc;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        
+        /* Input fields */
+        .custom-input {
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+            border-radius: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .custom-input:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 7px rgba(108, 92, 231, 0.4);
+        }
+        
+        /* Buttons */
+        .custom-btn-primary {
+            background-color: #6c5ce7;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 14px 24px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .custom-btn-primary:hover {
+            background-color: #4a00e0;
+            box-shadow: 0 4px 12px rgba(74, 0, 224, 0.2); /* Add slight shadow on hover */
+        }
+        
+        /* Breadcrumb styling */
+        .breadcrumb {
+            background: transparent;
+            font-size: 1.1rem;
+            padding: 10px 0;
+        }
+        
+        .breadcrumb-item a {
+            color: #6c5ce7;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+        
+
+      
+
+    </style>
+    
+</head>
+
+<body>
+    <div class="pre-loader">
+        <div class="pre-loader-box">
+            <div class="loader-logo">
+                <img src="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}" alt="Tagapo Logo">
+            </div>
+            <div class="loader-progress" id="progress_div">
+                <div class="bar" id="bar1"></div>
+            </div>
+            <div class="percent" id="percent1"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    {% include 'superadmin/header.html' %}
+
+    {% include 'superadmin/right_sidebar.html' %}
+
+    {% include 'superadmin/left_sidebar.html' %}
+
+    <div class="mobile-menu-overlay"></div>
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-50px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>User Management</h4>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-md-6 col-sm-12 text-right">
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'superadmin_dashboard' %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">User Management</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Improved Form Design -->
+                <div class="card custom-card shadow border-0 mt-4">
+                    <div class="card-header custom-card-header text-white">
+                        <h5 class="mb-0">Create Account</h5>
+                    </div>
+                    <div class="card-body custom-card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}                            
+                            <!-- Select Account Type -->
+                            <div class="form-group">
+                                <label for="account_type" class="font-weight-bold">Account Type*</label>
+                                <select class="form-control rounded-pill" id="account_type" name="account_type" required onchange="toggleFields()">
+                                    <option value="" disabled selected>Select Account Type</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="superadmin">Superadmin</option>
+                                </select>
+                            </div>
+    
+                            <!-- Common Fields for both Admin and Superadmin -->
+                            <div class="form-group">
+                                <label for="email" class="font-weight-bold">Email Address*</label>
+                                <input type="email" class="form-control rounded-pill" id="email" name="email" required placeholder="Enter email address">
+                            </div>
+                            <div class="form-group">
+                                <label for="username" class="font-weight-bold">Username*</label>
+                                <input type="text" class="form-control rounded-pill" id="username" name="username" required placeholder="Enter username">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="password" class="font-weight-bold">Password*</label>
+                                    <input type="password" class="form-control rounded-pill" id="password" name="password" required placeholder="Enter password">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="confirm_password" class="font-weight-bold">Confirm Password*</label>
+                                    <input type="password" class="form-control rounded-pill" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+                                </div>
+                            </div>
+    
+                            <!-- Admin-Specific Fields -->
+                            <div id="admin_fields" style="display: none;">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="first_name" class="font-weight-bold">First Name*</label>
+                                        <input type="text" class="form-control rounded-pill" id="first_name" name="first_name" placeholder="Enter first name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="last_name" class="font-weight-bold">Last Name*</label>
+                                        <input type="text" class="form-control rounded-pill" id="last_name" name="last_name" placeholder="Enter last name">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="gender" class="font-weight-bold">Gender*</label>
+                                        <select class="form-control rounded-pill" id="gender" name="gender">
+                                            <option value="" disabled selected>Select gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="contact_number" class="font-weight-bold">Contact Number*</label>
+                                        <input type="text" class="form-control rounded-pill" id="contact_number" name="contact_number" placeholder="Enter contact number">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn custom-btn-primary btn-block rounded-pill mt-4">Create Account</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	<div class="footer-wrap pd-20 mb-20 card-box">All rights reserved.</div>  
+
+     <!-- Include necessary Bootstrap and FontAwesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="{%static 'vendors/scripts/core.js' %}"></script>
+    <script src="{%static 'vendors/scripts/script.min.js' %}"></script>
+    <script src="{%static 'vendors/scripts/process.js' %}"></script>
+    <script src="{%static 'vendors/scripts/layout-settings.js' %}"></script>
+
+    <script>
+        // Toggle fields based on selected account type
+        function toggleFields() {
+            var accountType = document.getElementById("account_type").value;
+            var adminFields = document.getElementById("admin_fields");
+        
+            if (accountType === "admin") {
+                adminFields.style.display = "block";
+                document.getElementById("full_name").required = true;
+                document.getElementById("gender").required = true;
+                document.getElementById("contact_number").required = true;
+            } else {
+                adminFields.style.display = "none";
+                document.getElementById("full_name").required = false;
+                document.getElementById("gender").required = false;
+                document.getElementById("contact_number").required = false;
+            }
+        }
+        </script>
+
+        
+</body>
+
+</html>

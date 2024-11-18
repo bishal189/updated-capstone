@@ -1,0 +1,396 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>Barangay AI</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/icon-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/style.css' %}">
+
+    <style>
+        .pre-loader {
+            background-image: url("{% static 'src/images/hall.jpg' %}"); /* Replace with your image URL */
+            background-size: cover; /* Ensures the image covers the entire pre-loader background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="pre-loader">
+        <div class="pre-loader-box">
+            <div class="loader-logo">
+                <img src="{%static 'src\images\BRGY_TAGAPO LOGO.png' %}" alt="Tagapo Logo">
+            </div>
+            <div class="loader-progress" id="progress_div">
+                <div class="bar" id="bar1"></div>
+            </div>
+            <div class="percent" id="percent1"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    {% include 'superadmin/header.html' %}
+  
+    {% include 'superadmin/right_sidebar.html' %}
+
+    {% include 'superadmin/left_sidebar.html' %}
+
+    <div class="mobile-menu-overlay"></div>
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-50px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>User Management</h4>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-md-6 col-sm-12 text-right">
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'superadmin_dashboard' %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">User Management</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+    
+           <!-- Add your content here -->
+                <div class="card-box mb-30">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="pd-20">User List</h5>
+                        <input type="text" id="searchInput" class="form-control w-25" placeholder="🔍 Search..." onkeyup="searchTable()" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    </div>
+
+                    <table class="table table-hover" id="userTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for users in users %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ users.get_full_name }}</td>
+                                <td>{{ users.email }}</td>
+                                <td>Admin</td>
+                                <td><span class="badge badge-success">Active</span></td> <!-- Update based on actual user status -->
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="openEditModal(this)"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(this)"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>                        
+                    </table>
+                </div>
+
+                <!-- Improved Edit User Modal -->
+                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content" style="border-radius: 12px; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);">
+                            <!-- Header with gradient -->
+                            <div class="modal-header" style="background: linear-gradient(90deg, #007bff, #0056b3); color: white; border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                                <h5 class="modal-title text-center w-100" id="editUserModalLabel" style="font-weight: 600;">Edit User</h5>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="padding: 35px;">
+                                <form id="editUserForm">
+                                    <!-- Hidden field to store user ID -->
+                                    <input type="hidden" id="editUserId">
+                                    
+                                    <div class="form-row">
+                                        <!-- Name Field -->
+                                        <div class="form-group col-md-6">
+                                            <label for="editUserName">Name <span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control shadow-sm" id="editUserName" placeholder="Enter full name" required style="border-radius: 8px; border: 1px solid #ced4da; padding: 12px; font-size: 14px;">
+                                        </div>
+                                        <!-- Email Field -->
+                                        <div class="form-group col-md-6">
+                                            <label for="editUserEmail">Email <span style="color: red;">*</span></label>
+                                            <input type="email" class="form-control shadow-sm" id="editUserEmail" placeholder="Enter email address" required style="border-radius: 8px; border: 1px solid #ced4da; padding: 12px; font-size: 14px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <!-- Role Field -->
+                                        <div class="form-group col-md-6">
+                                            <label for="editUserRole">Role <span style="color: red;">*</span></label>
+                                            <select class="form-control shadow-sm" id="editUserRole" required style="border-radius: 10px; border: 1px solid #ced4da; padding: 12px;">
+                                                <option value="">-- Select Role --</option>
+                                                <option value="Admin">Admin</option>
+                                                <option value="Editor">Editor</option>
+                                                <option value="User">User</option>
+                                                <option value="Moderator">Moderator</option>
+                                            </select>
+                                        </div>
+                                        <!-- Status Field -->
+                                        <div class="form-group col-md-6">
+                                            <label for="editUserStatus">Status <span style="color: red;">*</span></label>
+                                            <select class="form-control shadow-sm" id="editUserStatus" required style="border-radius: 8px; border: 1px solid #ced4da; padding: 12px;">
+                                                <option value="">-- Select Status --</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Inactive">Inactive</option>
+                                                <option value="Deleted">Deleted</option>
+                                                <option value="Freeze">Freeze</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Validation Message -->
+                                    <small id="formErrorMessage" class="form-text text-danger d-none">Please fill out all required fields.</small>
+                                    
+                                    <!-- Save Changes Button -->
+                                    <div class="modal-footer justify-content-center" style="border-top: none; padding-top: 20px;">
+                                        <button type="button" class="btn btn-light" data-dismiss="modal" style="border-radius: 30px; padding: 10px 30px; border: 1px solid #ced4da;">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" style="border-radius: 30px; padding: 10px 30px;">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-wrap pd-20 mb-20 card-box">
+                    All rights reserved.
+                </div>
+
+     <!-- Include necessary Bootstrap and FontAwesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css' %}">
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="{%static 'vendors/scripts/core.js' %}"></script>
+    <script src="{%static 'vendors/scripts/script.min.js' %}"></script>
+    <script src="{%static 'vendors/scripts/process.js' %}"></script>
+    <script src="{%static 'vendors/scripts/layout-settings.js' %}"></script>
+
+    <script>
+            // Search function
+            function searchTable() {
+                var input = document.getElementById("searchInput");
+                var filter = input.value.toLowerCase();
+                var table = document.getElementById("userTable");
+                var tr = table.getElementsByTagName("tr");
+            
+                for (var i = 1; i < tr.length; i++) {
+                    var tdName = tr[i].getElementsByTagName("td")[0];
+                    var tdEmail = tr[i].getElementsByTagName("td")[1];
+                    var tdRole = tr[i].getElementsByTagName("td")[2];
+                    if (tdName || tdEmail || tdRole) {
+                        var nameValue = tdName.textContent || tdName.innerText;
+                        var emailValue = tdEmail.textContent || tdEmail.innerText;
+                        var roleValue = tdRole.textContent || tdRole.innerText;
+                        if (nameValue.toLowerCase().indexOf(filter) > -1 || 
+                            emailValue.toLowerCase().indexOf(filter) > -1 || 
+                            roleValue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }       
+                }
+            }
+        
+            // Save user data to local storage
+            function saveUserData() {
+                const rows = document.querySelectorAll('#userTable tbody tr');
+                let users = [];
+        
+                rows.forEach(row => {
+                    const id = row.querySelector('th').textContent;
+                    const name = row.querySelector('td:nth-child(2)').textContent;
+                    const email = row.querySelector('td:nth-child(3)').textContent;
+                    const role = row.querySelector('td:nth-child(4)').textContent;
+                    const status = row.querySelector('td:nth-child(5) span').textContent;
+        
+                    users.push({ id, name, email, role, status });
+                });
+        
+                // Save data in local storage
+                localStorage.setItem('userData', JSON.stringify(users));
+            }
+        
+            // Load user data from local storage on page load
+            function loadUserData() {
+                const storedData = localStorage.getItem('userData');
+                if (storedData) {
+                    const users = JSON.parse(storedData);
+                    const rows = document.querySelectorAll('#userTable tbody tr');
+                    
+                    users.forEach((user, index) => {
+                        const row = rows[index];
+                        row.querySelector('th').textContent = user.id;
+                        row.querySelector('td:nth-child(2)').textContent = user.name;
+                        row.querySelector('td:nth-child(3)').textContent = user.email;
+                        row.querySelector('td:nth-child(4)').textContent = user.role;
+                        row.querySelector('td:nth-child(5) span').textContent = user.status;
+                        row.querySelector('td:nth-child(5) span').className = getStatusClass(user.status);
+                    });
+                }
+            }
+        
+            // Function to open the modal and populate it with the selected user data
+            function openEditModal(button) {
+                const row = button.closest('tr');
+                const id = row.querySelector('th').textContent;
+                const name = row.querySelector('td:nth-child(2)').textContent;
+                const email = row.querySelector('td:nth-child(3)').textContent;
+                const role = row.querySelector('td:nth-child(4)').textContent;
+                const status = row.querySelector('td:nth-child(5) span').textContent;
+        
+                // Set values in the modal
+                document.getElementById('editUserId').value = id;
+                document.getElementById('editUserName').value = name;
+                document.getElementById('editUserEmail').value = email;
+                document.getElementById('editUserRole').value = role;
+                document.getElementById('editUserStatus').value = status;
+        
+                // Show the modal
+                $('#editUserModal').modal('show');
+            }
+        
+            // Handle form submission
+            document.getElementById('editUserForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+        
+                const id = document.getElementById('editUserId').value;
+                const name = document.getElementById('editUserName').value;
+                const email = document.getElementById('editUserEmail').value;
+                const role = document.getElementById('editUserRole').value;
+                const status = document.getElementById('editUserStatus').value;
+        
+                // Update the corresponding row in the table
+                const rows = document.querySelectorAll('#userTable tbody tr');
+                rows.forEach(row => {
+                    if (row.querySelector('th').textContent === id) {
+                        row.querySelector('td:nth-child(2)').textContent = name;
+                        row.querySelector('td:nth-child(3)').textContent = email;
+                        row.querySelector('td:nth-child(4)').textContent = role;
+                        row.querySelector('td:nth-child(5) span').textContent = status;
+                        row.querySelector('td:nth-child(5) span').className = getStatusClass(status);
+                    }
+                });
+        
+                // Save updated data to local storage
+                saveUserData();
+        
+                // Close the modal
+                $('#editUserModal').modal('hide');
+            });
+        
+            // Helper function to set badge class based on status
+            function getStatusClass(status) {
+                if (status === 'Active') {
+                    return 'badge badge-success';
+                } else if (status === 'Inactive') {
+                    return 'badge badge-warning';
+                } else if (status === 'Deleted') {
+                    return 'badge badge-danger';
+                } else if (status === 'Freeze') {
+                    return 'badge';
+                }
+            }
+        
+            // Load data from local storage when the page loads
+            document.addEventListener('DOMContentLoaded', loadUserData);
+
+            // Handle form submission with validation
+            document.getElementById('editUserForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                
+                const id = document.getElementById('editUserId').value;
+                const name = document.getElementById('editUserName').value;
+                const email = document.getElementById('editUserEmail').value;
+                const role = document.getElementById('editUserRole').value;
+                const status = document.getElementById('editUserStatus').value;
+
+            // Validate the fields
+            if (!name) {
+                alert("Name cannot be empty.");
+                return;
+            }
+
+            // Email validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!role) {
+                alert("Role cannot be empty.");
+                return;
+            }
+
+            // Update the corresponding row in the table
+            const rows = document.querySelectorAll('#userTable tbody tr');
+            rows.forEach(row => {
+                if (row.querySelector('th').textContent === id) {
+                    row.querySelector('td:nth-child(2)').textContent = name;
+                    row.querySelector('td:nth-child(3)').textContent = email;
+                    row.querySelector('td:nth-child(4)').textContent = role;
+                    row.querySelector('td:nth-child(5) span').textContent = status;
+                    row.querySelector('td:nth-child(5) span').className = getStatusClass(status);
+                }
+            });
+            saveUserData();
+
+            $('#editUserModal').modal('hide');
+        });
+
+        function deleteUser(button) {
+            var row = button.closest("tr");
+            var confirmation = confirm("Are you sure you want to delete this user?");
+            if (confirmation) {
+                row.remove();
+            }
+        }
+        </script>  
+</body>
+</html>

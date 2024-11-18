@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'admin_panel/head.html' %}
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-119386393-1');
+	</script>
+</head>
+<body>
+	<div class="pre-loader">
+		<div class="pre-loader-box">
+			<div class="loader-logo"><img src="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}" alt=""></div>
+			<div class='loader-progress' id="progress_div">
+				<div class='bar' id='bar1'></div>
+			</div>
+			<div class='percent' id='percent1'></div>
+			<div class="loading-text">
+				Loading...
+			</div>
+		</div>
+	</div>
+
+	<div class="header">
+		<div class="header-left">
+			<div class="menu-icon dw dw-menu"></div>
+		</div>
+		<div class="header-right">
+			<div class="dashboard-setting user-notification">
+				<div class="dropdown">
+					<a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+						<i class="dw dw-settings2"></i>
+					</a>
+				</div>
+			</div>
+			{% include 'admin_panel/notification.html' %}
+			{% include 'admin_panel/dropdown.html' %}
+		</div>
+	</div>
+	{% include 'admin_panel/right_sidebar.html' %}
+	{% include 'admin_panel/left_sidebar.html' %}
+	<div class="mobile-menu-overlay"></div>
+	<div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-150px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="title">
+                                <h4>Program Management</h4>
+                            </div>
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Program Management</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="calendar-wrap">
+                        <div id='calendar'></div>
+                    </div>
+                    <!-- Calendar Modals -->
+                    <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h4 class="h4"><span class="event-icon weight-400 mr-3"></span><span class="event-title"></span></h4>
+                                    <div class="event-body"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                            <!-- Add Event Modal -->
+                    <div id="modal-view-event-add" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form id="add-event-form">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add Event</h5>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="event-title">Title</label>
+                                            <input type="text" class="form-control" id="event-title" name="title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="event-description">Description</label>
+                                            <textarea class="form-control" id="event-description" name="description" required></textarea>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="event-start">Start Date</label>
+                                                <input type="datetime-local" class="form-control" id="event-start" name="start" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="event-end">End Date</label>
+                                                <input type="datetime-local" class="form-control" id="event-end" name="end">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Event Modal -->
+                    <div id="modal-edit-event" class="modal fade">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <form id="edit-event-form" style="max-height: 80vh; overflow-y: auto;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Event</h5>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" id="edit-event-id">
+                                        <div class="form-group">
+                                            <label for="edit-event-title">Title</label>
+                                            <input type="text" class="form-control" id="edit-event-title" name="title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edit-event-description">Description</label>
+                                            <textarea class="form-control" id="edit-event-description" name="description" required></textarea>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="edit-event-start">Start Date</label>
+                                                <input type="datetime-local" class="form-control" id="edit-event-start" name="start" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="edit-event-end">End Date</label>
+                                                <input type="datetime-local" class="form-control" id="edit-event-end" name="end">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-wrap pd-20 mb-20 card-box">
+                All rights reserved.
+            </div>
+
+<script src="{%static 'vendors/scripts/core.js' %}"></script>
+<script src="{%static 'vendors/scripts/script.min.js' %}"></script>
+<script src="{%static 'vendors/scripts/process.js' %}"></script>
+<script src="{%static 'vendors/scripts/layout-settings.js' %}"></script>
+<script src="{%static 'src/plugins/fullcalendar/fullcalendar.min.js' %}"></script>
+<script src="{%static 'vendors/scripts/programsettings.js' %}"></script>
+
+</body>
+</html>

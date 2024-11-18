@@ -1,0 +1,161 @@
+{% load static %}
+/* Additional styling for the table */
+     table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .pre-loader {
+        background-image: url("src/images/hall.jpg"); /* Replace with your image URL */
+        background-size: cover; /* Ensures the image covers the entire pre-loader background */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }   
+
+    /* General Modal Styling */
+.modal-content {
+border-radius: 6px;
+border: 2px solid #fbc02d;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+background-color: #228B22;
+color: #fff;
+border-bottom: 1px solid #e9ecef;
+padding: 15px 20px;
+border-top-left-radius: 6px;
+border-top-right-radius: 6px;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+position: relative;
+font-weight: bold; /* Make the text bold */
+
+}
+
+
+/* Position the close button to the right while keeping the title centered */
+.modal-header .close {
+position: absolute;
+right: 20px;
+top: 15px;
+font-size: 20px;
+color: #fff;
+opacity: 1;
+}
+
+
+.modal-title {
+font-weight: 500;
+font-size: 18px;
+}
+
+.modal-body {
+padding: 20px;
+font-size: 15px;
+color: #495057;
+border: 2px solid #ced4da; /* Light grey border */
+border-radius: 5px; /* Optional: add some rounded corners */
+}
+
+
+.modal-footer {
+padding: 10px 20px;
+border-top: 1px solid #e9ecef;
+background-color: #f8f9fa;
+border-bottom-left-radius: 6px;
+border-bottom-right-radius: 6px;
+}
+
+/* Specific Styling for View Event Modal */
+#modal-view-event .modal-body {
+padding: 20px;
+font-size: 15px;
+color: #495057;
+border: 2px solid #ced4da; /* Light grey border */
+border-radius: 5px; /* Rounded corners */
+background-color: #f8f9fa; /* Light grey background */
+}
+
+/* Improve readability with spacing and alignment */
+#modal-view-event .modal-body p {
+margin-bottom: 15px; /* Increased spacing between paragraphs */
+line-height: 1.6; /* Improved line spacing for better readability */
+display: flex;
+align-items: center; /* Vertically align text with icons if present */
+}
+
+#modal-view-event .modal-body p strong {
+color: #007bff; /* Blue color for strong text */
+margin-right: 10px; /* Space between the label and content */
+}
+
+/* Icon and text alignment */
+#modal-view-event .modal-body p .event-icon {
+margin-right: 10px;
+font-size: 18px;
+color: #007bff;
+}
+
+#modal-view-event .modal-footer {
+display: flex;
+justify-content: flex-end; /* Align buttons to the right */
+gap: 10px; /* Spacing between buttons */
+padding: 10px 20px;
+background-color: #f8f9fa;
+border-top: 1px solid #e9ecef;
+border-bottom-left-radius: 6px;
+border-bottom-right-radius: 6px;
+}
+
+/* Button Styling */
+#modal-view-event .modal-footer .btn {
+padding: 8px 16px;
+font-size: 14px;
+border-radius: 4px;
+transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+#modal-view-event .edit-event {
+background-color: #28a745; /* Green for edit */
+border-color: #28a745;
+color: #fff;
+}
+
+#modal-view-event .delete-event {
+background-color: #dc3545; /* Red for delete */
+border-color: #dc3545;
+color: #fff;
+}
+
+/* Hover Effects */
+#modal-view-event .btn:hover {
+opacity: 0.9; /* Slight fade effect on hover */
+}
+
+#modal-view-event .close {
+font-size: 20px;
+color: #fff;
+opacity: 1;
+cursor: pointer;
+}

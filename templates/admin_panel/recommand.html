@@ -1,0 +1,16 @@
+<!-- admin_panel/child_profile.html -->
+{% comment %} <h1>{{ child_record.first_name }} {{ child_record.last_name }}'s Profile</h1>
+
+<p><strong>Weight:</strong> {{ child_record.weight }} kg</p>
+<p><strong>Height:</strong> {{ child_record.height }} cm</p>
+<p><strong>Age:</strong> {{ child_record.age_in_months }} months</p>
+<p><strong>Weight Status:</strong> {{ child_record.get_weight_status_display }}</p> {% endcomment %}
+
+{% if record %}
+    <div class="recommendations">
+        <h3>AI Recommendations:</h3>
+        <p>{{ record }}</p>
+    </div>
+{% endif %}
+
+<a href="{% url 'admin_child_record' %}">Back to Records</a>

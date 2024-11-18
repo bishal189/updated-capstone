@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - Barangay Tagapo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #E8F5E9 30%, #FFFFFF 100%);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .logout-container {
+            background-color: #ffffff; /* White background for the container */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            border: solid #FBC02D;
+        }
+
+        .logout-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333333; /* Dark text for the heading */
+        }
+
+        .logout-container p {
+            margin-bottom: 30px;
+            color: #666666; /* Lighter text for the description */
+        }
+
+        .btn-custom {
+            margin: 10px;
+        }
+
+        .btn-custom-primary {
+            background-color: #4CAF50; /* Primary color */
+            color: #ffffff;
+        }
+
+        .btn-custom-primary:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+        }
+
+        .btn-custom-secondary {
+            background-color: white; /* Secondary color */
+            color: black;
+            border-color: #4CAF50;
+        }
+
+        .btn-custom-secondary:hover {
+            background-color: #5a6268; /* Darker shade for hover effect */
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888888; /* Footer text color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logout-container">
+        <h1>Confirm Logout</h1>
+        <p>Are you sure you want to log out? Your session will be endeds.</p>
+        <div>
+            <button class="btn btn-custom btn-custom-primary" onclick="handleLogout()">Logout</button>
+            <a href="{% url 'superadmin_dashboard' %}" class="btn btn-custom btn-custom-secondary">Cancel</a>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function handleLogout() {
+            window.location.href = "{% url 'login' %}";
+        }
+    </script>
+</body>
+
+</html>

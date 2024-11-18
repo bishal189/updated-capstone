@@ -1,0 +1,437 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8" />
+    <title>Barangay AI</title>
+
+
+    <!-- Link to CSS and JavaScript Files -->
+    <link rel="icon" sizes="180x180" href="{% static 'src/images/Bai_LOGO.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'src/images/Bai_LOGO.png' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/icon-font.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <!-- Additional Styling -->
+    <style>
+        .login-header {
+            background-image: url("{% static 'src/images/header1.png' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border: none;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+            border-bottom: none;
+            height: 65px;
+        }
+
+        .login-header .brand-logo a {
+            cursor: default;
+        }
+
+        .login-header .logo-text {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .pre-loader {
+            background-image: url("{% static 'src/images/hall.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-color: #ffffff;
+        }
+
+        .loader-logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .pre-loader-box {
+            width: 210px;
+            height: 210px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .loading-text {
+            font-size: 50px;
+            margin-bottom: 500px;
+            color: #000000;
+        }
+
+        .alert,
+        .message {
+            /* Replace with the actual class name if different */
+            font-size: 13px;
+            /* Smaller font size */
+            padding: 8px 8px;
+            /* Reduced padding */
+            max-width: 300px;
+            /* Constrain width */
+            margin: 5px 5px;
+            /* Center the message and add spacing around it */
+            border-radius: 5px;
+            /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Light shadow for depth */
+        }
+
+        /* Optional customization for different message types */
+        .alert-success {
+            /* Success messages */
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-error {
+            /* Error messages */
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-info {
+            /* Info messages */
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        body {
+            background-color: white;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .form-control {
+            width: 100%;
+            /* Ensures it takes up the width of the container */
+            max-width: 400px;
+            /* Limit the maximum width */
+            font-size: 14px;
+            /* Slightly smaller font size */
+            padding: 5px 10px;
+            /* Reduces padding inside the textbox */
+            height: 40px;
+            /* Reduces the height of the textbox */
+            border-radius: 6px;
+            /* Keeps rounded corners but slightly smaller */
+            box-sizing: border-box;
+            /* Ensures padding doesn’t expand the width */
+        }
+
+        #loginForm p {
+            margin: 5px 0;
+            /* Reduced top and bottom margin */
+            font-size: 13px;
+            /* Smaller font size */
+            text-align: center;
+        }
+
+        .login-left {
+            flex: 1;
+            background-image: url("{% static 'src/images/Login_Home.jpeg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .login-right {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .login-box {
+            background-image: url("{% static 'src/images/bglogin.jpg' %}");
+            color: #000000;
+            border-color: #a8d5ba !important;
+            width: 100%;
+            max-width: 320px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 80px;
+        }
+
+        .login-title {
+            margin: 10px 0;
+            padding: 5px;
+            color: #000000;
+            font-size: 2px;
+            text-align: center;
+        }
+
+        .input-icon,
+        .input-group,
+        .d-flex,
+        .mb-3 {
+            margin-bottom: 10px;
+            /* Reduced spacing between fields */
+        }
+
+        .d-flex .custom-control-label,
+        .forgot-password {
+            font-size: 12px;
+            /* Slightly smaller font for Remember and Forgot Password */
+            margin-bottom: 5px;
+            /* Reduced margin for a tighter layout */
+        }
+
+        .btn-primary {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 15px;
+            padding: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e8449;
+            border-color: #1e8449;
+        }
+
+        .btn-outline-primary {
+            background-color: transparent;
+            color: #4b4b4b;
+            border-color: #4b4b4b;
+            border-radius: 8px;
+            outline: none;
+            box-shadow: none;
+            width: 100%;
+            font-size: 16px;
+            padding: 8px;
+            margin: 0 auto;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #4b4b4b;
+            /* Darker gray for hover */
+            color: #ffffff;
+            border-color: #4b4b4b;
+        }
+
+        .btn-outline-primary:disabled {
+            background-color: #4b4b4b !important;
+            color: white !important;
+            cursor: not-allowed;
+            opacity: 1 !important;
+        }
+
+        .btn-outline-primary:disabled:hover {
+            background-color: #4b4b4b !important;
+            color: white !important;
+        }
+
+        .btn-outline-primary:active {
+            background-color: #4b4b4b !important;
+            box-shadow: none !important;
+        }
+
+        .text-primary {
+            color: #27ae60 !important;
+        }
+
+        .input-icon {
+            position: relative;
+            font-size: 14px;
+            /* Adjusted font size */
+        }
+
+        .input-icon i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+            /* Adjusted icon size */
+        }
+
+        .header-logo {
+            width: 10px;
+            /* Adjust width as desired */
+            height: 10;
+        }
+    </style>
+</head>
+
+<body class="login-page">
+    <div class="pre-loader">
+        <div class="pre-loader-box">
+            <div class="loader-logo">
+                <img id="header-logo" src="{% static 'src/images/BAi_LOGO.png' %}" alt="AI Logo" />
+            </div>
+            <div class="loader-progress" id="progress_div">
+                <div class="bar" id="bar1"></div>
+            </div>
+            <div class="percent" id="percent1"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    <div class="login-header box-shadow">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="brand-logo">
+                <a href="#">
+                    <img src="{% static 'src/images/BAi_LOGO.png' %}" alt="AI Logo" />
+                    <span class="logo-text">Barangay AI</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="login-container">
+        <div class="login-left"></div>
+        <div class="login-right">
+            <div class="login-box bg-white box-shadow border-radius-10">
+                <div class="login-title">
+                    <h4 class="text-center text-primary">Login</h4>
+                </div>
+                <form method="post" action="{% url 'login' %}" id="loginForm">
+                    {% csrf_token %}
+                    {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+                    <div class="input-icon mb-3">
+                        <i class="fas fa-user"></i>
+                        <input type="text" maxlength="50" class="form-control form-control-lg" name="username"
+                            placeholder="Username" required />
+
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" maxlength="50" class="form-control form-control-lg" name="password"
+                            id="password" placeholder="********" required maxlength="15" />
+
+                    </div>
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                            <label class="custom-control-label" for="customCheck1">Remember</label>
+                        </div>
+                        <div class="forgot-password"><a href="{% url 'forgotpassword' %}">Forgot Password?</a></div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                    </div>
+                    <p>Don't have an account?</p>
+                    <div class="mb-3">
+                        <a class="btn btn-outline-primary btn-lg btn-block" href="{% url 'register' %}">Sign Up</a>
+                    </div>
+                </form>
+                <div id="error-message" class="text-danger text-center mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JS Files -->
+    <script src="{% static 'vendors/scripts/core.js' %}"></script>
+    <script src="{% static 'vendors/scripts/script.min.js' %}"></script>
+    <script src="{% static 'vendors/scripts/process.js' %}"></script>
+    <script src="{% static 'vendors/scripts/layout-settings.js' %}"></script>
+    <script src="{% static 'vendors/styles/style.css' %}"></script>
+
+    <script>
+
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+
+            var username = document.querySelector("input[name='username']").value.trim();
+            var password = document.querySelector("input[name='password']").value.trim();
+            var errorMessage = document.getElementById("error-message");
+
+
+            // Check if username or password is empty
+            if (username === "" || password === "") {
+                errorMessage.textContent = "Both fields are required.";
+            }
+            // Check if password is greater than 8 characters
+            else if (password.length > 15) {
+                errorMessage.textContent = "Password cannot exceed 15 characters.";
+            }
+            // If everything is valid, submit the form
+            else {
+                errorMessage.textContent = "";
+                document.getElementById("loginForm").submit();
+            }
+        });
+        // Get references to the password field and toggle icon
+        const passwordField = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+
+        togglePassword.addEventListener("click", function () {
+            // Toggle the type attribute of the password field between 'password' and 'text'
+            const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+            passwordField.setAttribute("type", type);
+
+
+            // Toggle the icon class based on the current state
+            if (type === "password") {
+                eyeIcon.classList.remove("dw dw-eye-off"); // Hide icon
+                eyeIcon.classList.add("dw dw-eye");        // Show icon
+            } else {
+                eyeIcon.classList.remove("dw dw-eye");     // Hide icon
+                eyeIcon.classList.add("dw dw-eye-off");    // Show icon
+            }
+        });
+
+
+    </script>
+</body>
+
+
+</html>

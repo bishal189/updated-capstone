@@ -1,0 +1,358 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>Barangay AI</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/icon-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'vendors/styles/sa-dashboard.css' %}">
+   
+</head>
+<style>
+    .pre-loader {
+        background-image: url("{% static 'src/images/hall.jpg' %}"); /* Replace with your image URL */
+        background-size: cover; /* Ensures the image covers the entire pre-loader background */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-box {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .card-box:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .widget-style1 .progress-data {
+        flex: 1;
+    }
+
+    .widget-data {
+        text-align: right;
+    }
+
+    .user-info-dropdown .dropdown-menu {
+        min-width: 150px;
+    }
+
+    .right-sidebar-body-content h4 {
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .right-sidebar-body-content .form-group {
+        margin-bottom: 15px;
+    }
+
+    .footer-wrap {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .card-box {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .brand-logo .logo-text {
+    font-size: 15px; /* Adjust the font size as needed */
+    color: white; /* Adjust the color as needed */
+    font-weight: bold;
+  }
+</style>
+
+<body>
+    <div class="pre-loader">
+        <div class="pre-loader-box">
+            <div class="loader-logo">
+                <img src="{%static 'src/images/BRGY_TAGAPO LOGO.png' %}" alt="AI Logo">
+            </div>
+            <div class="loader-progress" id="progress_div">
+                <div class="bar" id="bar1"></div>
+            </div>
+            <div class="percent" id="percent1">150%</div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    {% include 'superadmin/header.html' %}
+
+
+    {% include 'superadmin/right_sidebar.html' %}
+
+
+    {% include 'superadmin/left_sidebar.html' %}
+
+    <div class="main-container">
+		<div class="pd-ltr-20">
+			<div class="card-box pd-20 height-100-p mb-30" style="position: relative;">
+				<div class="row align-items-center">
+					<div class="col-md-4">
+						<img src="{%static 'vendors/images/banner-img.png' %}" alt="Banner">
+					</div>
+					<div class="col-md-6">
+						<h4 class="font-20 weight-500 mb-10 text-capitalize">
+							Welcome back <div class="weight-600 font-30 text-blue" id="welcome-name"></div>
+						</h4>
+					</div>
+					<div class="col-md-2" style="position: absolute; top: 10px; right: 150px;">
+						<div id="date-display" class="weight-500 font-20 text-black" style="white-space: nowrap;"></div>
+					</div>
+				</div>
+			</div>
+            <!-- Dashboard Cards -->
+            <div class="row">
+                <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="card-box height-100-p widget-style1">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <div class="progress-data">
+                                <div class="progress" style="height: 8px">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ total_admins }}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="widget-data">
+                                <div class="h4 mb-0">{{ total_admins }}</div>
+                                <div class="weight-300 font-14">Total Admin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="card-box height-100-p widget-style1">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <div class="progress-data">
+                                <div class="progress" style="height: 8px">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ active_admins }}" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="widget-data">
+                                <div class="h4 mb-0">{{ active_admins }}</div>
+                                <div class="weight-300 font-14">Active Admins</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 mb-30">
+                    <div class="card-box height-100-p widget-style1">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <div class="progress-data">
+                                <div class="progress" style="height: 8px">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ server_uptime }}" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="widget-data">
+                                <div class="h4 mb-0">{{ server_uptime }}%</div>
+                                <div class="weight-300 font-14">Server Uptime</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <!-- Online Admins -->
+                <div class="col-xl-4 col-md-6 mb-30">
+                <div class="card-box height-100-p">                
+                    <h5 class="font-18" style="font-weight: 600; margin-bottom: 20px; color: #007bff;">Admins Currently Online</h5>
+                    <ul id="online-admin-list" class="list-group" style="padding-left: 0;">
+                        <!-- Dynamic list of online admins -->
+                        {% for users in online_users %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="border: none; background: #fff; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                                <span style="font-weight: 500;">{{ users.first_name }} {{ users.last_name }}</span>
+                                <span class="badge badge-success" style="background-color: #28a745; padding: 5px 10px; font-size: 14px; border-radius: 20px;">Online</span>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item" style="border: none; background: #fff; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);">
+                                <span style="font-weight: 500;">No admins online.</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        <!-- Admin Activity Chart Section -->
+            <div class="col-xl-8 col-md-6 mb-30">
+                <div class="card-box">
+                    <h5 class="font-18" style="font-weight: 600; margin-bottom: 20px; color: #007bff;">Admin Activity Chart</h5>
+                    <canvas id="adminActivityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="footer-wrap pd-20 mb-20 card-box">All rights reserved.</div>
+	
+	<!-- js -->
+	<script src="{%static 'vendors/scripts/core.js' %}"></script>
+	<script src="{%static 'vendors/scripts/script.min.js' %}"></script>
+	<script src="{%static 'vendors/scripts/process.js' %}"></script>
+	<script src="{%static 'vendors/scripts/layout-settings.js' %}"></script>
+	<script src="{%static 'src/plugins/apexcharts/apexcharts.min.js' %}"></script>
+	<script src="{%static 'src/plugins/datatables/js/jquery.dataTables.min.js' %}"></script>
+	<script src="{%static 'src/plugins/datatables/js/dataTables.bootstrap4.min.js' %}"></script>
+	<script src="{%static 'src/plugins/datatables/js/dataTables.responsive.min.js' %}"></script>
+	<script src="{%static 'src/plugins/datatables/js/dataTables.bootstrap4.min.js' %}"></script>
+	<script src="{%static 'vendors/scripts/dashboard.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Display the current date (optional)
+			const dateDisplay = document.getElementById('date-display');
+			const now = new Date();
+			dateDisplay.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+		});
+	
+	function updateDate() {
+        const dateElement = document.getElementById('date-display');
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date().toLocaleDateString(undefined, options);
+        dateElement.textContent = today;
+    }
+
+    updateDate();
+    setInterval(updateDate, 1000 * 60 * 60 * 24);
+    function handleLogout() {
+        window.location.href = "login.html";
+    }
+
+     // Function to fetch online admins
+     function fetchOnlineAdmins() {
+        fetch('/superadmin/online-admins/')
+            .then(response => response.json())
+            .then(data => {
+                const adminList = document.getElementById('online-admin-list');
+                adminList.innerHTML = '';
+
+                if (data.length === 0) {
+                    adminList.innerHTML = '<li class="list-group-item">No admins are currently online.</li>';
+                } else {
+                    data.forEach(admin => {
+                        adminList.innerHTML += `
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                ${admin.username}
+                                <span class="badge badge-success">Online</span>
+                            </li>`;
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching online admins:', error));
+    }
+
+    setInterval(fetchOnlineAdmins, 60000);
+
+    document.addEventListener('DOMContentLoaded', fetchOnlineAdmins);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('adminActivityChart').getContext('2d');
+    
+        const adminActivityChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Jack - Account Usage',
+                    data: [12, 15, 10, 17, 13, 19, 22, 20, 25, 18, 23, 20],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    fill: false,
+                    tension: 0.3,
+                    borderWidth: 2
+                }, {
+                    label: 'Cole - Account Usage',
+                    data: [14, 10, 16, 12, 9, 11, 15, 17, 19, 13, 14, 15],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false,
+                    tension: 0.3,
+                    borderWidth: 2
+                }, {
+                    label: 'Mei - Account Usage',
+                    data: [8, 12, 9, 14, 10, 16, 18, 21, 22, 19, 20, 18],
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    fill: false,
+                    tension: 0.3,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Account Usage (Logins/Updates)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Admin Account Usage Per Month'
+                    }
+                }
+            }
+        });
+    });
+    
+
+	</script>
+</body>
+
+</html>
